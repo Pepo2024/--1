@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جاليرى</title>
+    <link rel="shortcut icon" href="./gifts-solid.svg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary-bg: #f5f5f5;
+            --primary-text: #222;
+            --secondary-bg: #e0e0e0;
+            --secondary-text: #555;
+            --button-bg: #007bff;
+            --button-text: #fff;
+            --hover-bg: #0056b3;
+            --shadow-color: rgb(12, 97, 137);
+            --header-bg: #d5cccc9b;
+        }
+
+        body.dark-mode {
+            --primary-bg: #1c1c1c;
+            --primary-text: #f5f5f5;
+            --secondary-bg: #333;
+            --secondary-text: #aaa;
+            --button-bg: #444;
+            --button-text: #fff;
+            --hover-bg: #666;
+            --header-bg: #333;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: var(--primary-text);
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .store-info {
+            text-align: center;
+        }
+
+        .store-name {
+            font-size: 50px;
+            font-weight: bold;
+            text-shadow: 2px 2px 7px var(--shadow-color);
+        }
+
+        .contact {
+            font-size: 25px;
+            margin-top: 10px;
+            text-shadow: 2px 2px 8px var(--shadow-color);
+        }
+
+        .toggle-buttons {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .theme-toggle {
+            padding: 13px;
+            font-size: 17px;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 5px 0;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .header-title {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .header-title div {
+            font-size: 120px;
+            color: var(--secondary-text);
+            margin: 0;
+            text-shadow: 1px 2px 7px var(--shadow-color);
+        }
+
+        .header-title .en {
+            font-size: 60px;
+            margin-top: -10px;
+        }
+
+        .section {
+            padding: 20px;
+            font-size: 17px;
+            text-align: center;
+            text-shadow: 1px 2px 20px var(--shadow-color);
+        }
+
+        .section h2 {
+            font-size: 20px;
+        }
+
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .product {
+            text-align: center;
+            padding: 15px;
+            border: 1px solid var(--secondary-bg);
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        .product h3,
+        .product p {
+            text-shadow: 2px 2px 10px var(--shadow-color);
+        }
+
+        .order-now-btn {
+            padding: 10px;
+            font-size: 14px;
+            background-color: #ffcc00;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .order-now-btn:hover {
+            background-color: #e6b800;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 24px;
+            text-shadow: 2px 2px 10px var(--shadow-color);
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            /* تغيير هنا لعرض الأزرار بشكل عمودي */
+            align-items: stretch;
+            /* الأزرار ستملأ العرض الكامل */
+            margin-top: 20px;
+        }
+
+        .contact-buttons a {
+            width: 100%;
+            /* إضافة هذه الخاصية لجعل الأزرار تملأ العرض الكامل */
+            display: inline-block;
+            margin: 5px 0;
+            /* إضافة مسافة بين الأزرار */
+            padding: 10px;
+            font-size: 14px;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            text-decoration: none;
+            border-radius: 10px;
+            text-shadow: 2px 2px 10px var(--shadow-color);
+            text-align: center;
+            /* توسيط النص داخل الأزرار */
+        }
+
+        .contact-buttons a:hover {
+            background-color: var(--hover-bg);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px;
+            }
+
+            .store-name {
+                font-size: 40px;
+            }
+
+            .contact {
+                font-size: 20px;
+            }
+
+            .theme-toggle {
+                font-size: 12px;
+                padding: 10px;
+            }
+
+            .header-title div {
+                font-size: 70px;
+            }
+
+            .section h2 {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product {
+                width: 100%;
+            }
+
+            .header-title div {
+                font-size: 50px;
+            }
+
+            .header-title .en {
+                font-size: 30px;
+            }
+
+            .theme-toggle {
+                font-size: 10px;
+                padding: 6px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="store-info">
+            <div class="store-name">متجرالهدايا <i class="fa-solid fa-gifts"></i></div>
+            <div class="contact">رقم التواصل: 01228053020</div>
+        </div>
+        <div class="toggle-buttons">
+            <button class="theme-toggle" onclick="toggleTheme()">تبديل الوضع</button>
+        </div>
+    </header>
+
+    <div class="header-title">
+        <div>كريس</div>
+        <div class="en">Gallery</div>
+    </div>
+
+   
+    <div class="products-container">
+        <div class="product">
+            <img src="index (1).jpg" alt="منتج 1">
+            <h3>منتج 1</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (1).jpg', 'منتج 1')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (2).jpg" alt="منتج 2">
+            <h3>منتج 2</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (2).jpg', 'منتج 2')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (3).jpg" alt="منتج 3">
+            <h3>منتج 3</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (3).jpg', 'منتج 3')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (4).jpg" alt="منتج 4">
+            <h3>منتج 4</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (4).jpg', 'منتج 4')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (5).jpg" alt="منتج 5">
+            <h3>منتج 5</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (5).jpg', 'منتج 5')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (6).jpg" alt="منتج 6">
+            <h3>منتج 6</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (6).jpg', 'منتج 6')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (7).jpg" alt="منتج 7">
+            <h3>منتج 7</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (7).jpg', 'منتج 7')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (8).jpg" alt="منتج 8">
+            <h3>منتج 8</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (8).jpg', 'منتج 8')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (9).jpg" alt="منتج 9">
+            <h3>منتج 9</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (9).jpg', 'منتج 9')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (10).jpg" alt="منتج 10">
+            <h3>منتج 10</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (10).jpg', 'منتج 10')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (11).jpg" alt="منتج 11">
+            <h3>منتج 11</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (11).jpg', 'منتج 11')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (12).jpg" alt="منتج 12">
+            <h3>منتج 12</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (12).jpg', 'منتج 12')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (13).jpg" alt="منتج 13">
+            <h3>منتج 13</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (13).jpg', 'منتج 13')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (14).jpg" alt="منتج 14">
+            <h3>منتج 14</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (14).jpg', 'منتج 14')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (15).jpg" alt="منتج 15">
+            <h3>منتج 15</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (15).jpg', 'منتج 15')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (16).jpg" alt="منتج 16">
+            <h3>منتج 16</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (16).jpg', 'منتج 16')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (17).jpg" alt="منتج 17">
+            <h3>منتج 17</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (17).jpg', 'منتج 17')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (18).jpg" alt="منتج 18">
+            <h3>منتج 18</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (18).jpg', 'منتج 18')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (19).jpg" alt="منتج 19">
+            <h3>منتج 19</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (19).jpg', 'منتج 19')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (20).jpg" alt="منتج 20">
+            <h3>منتج 20</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (20).jpg', 'منتج 20')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (21).jpg" alt="منتج 21">
+            <h3>منتج 21</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (21).jpg', 'منتج 21')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (22).jpg" alt="منتج 22">
+            <h3>منتج 22</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (22).jpg', 'منتج 22')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (23).jpg" alt="منتج 23">
+            <h3>منتج 23</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (23).jpg', 'منتج 23')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (24).jpg" alt="منتج 24">
+            <h3>منتج 24</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (24).jpg', 'منتج 24')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (25).jpg" alt="منتج 25">
+            <h3>منتج 25</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (25).jpg', 'منتج 25')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (26).jpg" alt="منتج 26">
+            <h3>منتج 26</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (26).jpg', 'منتج 26')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (27).jpg" alt="منتج 27">
+            <h3>منتج 27</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (27).jpg', 'منتج 27')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (28).jpg" alt="منتج 28">
+            <h3>منتج 28</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (28).jpg', 'منتج 28')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (29).jpg" alt="منتج 29">
+            <h3>منتج 29</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (29).jpg', 'منتج 29')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (30).jpg" alt="منتج 30">
+            <h3>منتج 30</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (30).jpg', 'منتج 30')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (31).jpg" alt="منتج 31">
+            <h3>منتج 31</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (31).jpg', 'منتج 31')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (32).jpg" alt="منتج 32">
+            <h3>منتج 32</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (32).jpg', 'منتج 32')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (33).jpg" alt="منتج 33">
+            <h3>منتج 33</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (33).jpg', 'منتج 33')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (34).jpg" alt="منتج 34">
+            <h3>منتج 34</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (34).jpg', 'منتج 34')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (35).jpg" alt="منتج 35">
+            <h3>منتج 35</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (35).jpg', 'منتج 35')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (36).jpg" alt="منتج 36">
+            <h3>منتج 36</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (36).jpg', 'منتج 36')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (37).jpg" alt="منتج 37">
+            <h3>منتج 37</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (37).jpg', 'منتج 37')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (38).jpg" alt="منتج 38">
+            <h3>منتج 38</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (38).jpg', 'منتج 38')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (39).jpg" alt="منتج 39">
+            <h3>منتج 39</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (39).jpg', 'منتج 39')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (40).jpg" alt="منتج 40">
+            <h3>منتج 40</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (40).jpg', 'منتج 40')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (41).jpg" alt="منتج 41">
+            <h3>منتج 41</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (41).jpg', 'منتج 41')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (42).jpg" alt="منتج 42">
+            <h3>منتج 42</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (42).jpg', 'منتج 42')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (43).jpg" alt="منتج 43">
+            <h3>منتج 43</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (43).jpg', 'منتج 43')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (44).jpg" alt="منتج 44">
+            <h3>منتج 44</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (44).jpg', 'منتج 44')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (45).jpg" alt="منتج 45">
+            <h3>منتج 45</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (45).jpg', 'منتج 45')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (46).jpg" alt="منتج 46">
+            <h3>منتج 46</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (46).jpg', 'منتج 46')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (47).jpg" alt="منتج 47">
+            <h3>منتج 47</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (47).jpg', 'منتج 47')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (48).jpg" alt="منتج 48">
+            <h3>منتج 48</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (48).jpg', 'منتج 48')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (49).jpg" alt="منتج 49">
+            <h3>منتج 49</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (49).jpg', 'منتج 49')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (50).jpg" alt="منتج 50">
+            <h3>منتج 50</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (50).jpg', 'منتج 50')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (51).jpg" alt="منتج 51">
+            <h3>منتج 51</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (51).jpg', 'منتج 51')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (52).jpg" alt="منتج 52">
+            <h3>منتج 52</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (52).jpg', 'منتج 52')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (53).jpg" alt="منتج 53">
+            <h3>منتج 53</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (53).jpg', 'منتج 53')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (54).jpg" alt="منتج 54">
+            <h3>منتج 54</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (54).jpg', 'منتج 54')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (55).jpg" alt="منتج 55">
+            <h3>منتج 55</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (55).jpg', 'منتج 55')">اطلب الآن</button>
+        </div>
+        <div class="product">
+            <img src="index (56).jpg" alt="منتج 56">
+            <h3>منتج 56</h3>
+            <p>السعر مفاجأة🔥🔥</p>
+            <button class="order-now-btn" onclick="shareProduct('index (56).jpg', 'منتج 56')">اطلب الآن</button>
+        </div>
+    </div>
+    
+    <footer>حقوق الطبع والنشر &copy; 2024</footer>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+        function shareProduct(image, productName) {
+            // رابط الصورة
+            const imageUrl = `https://example.com/images/${image}`;  // تأكد من إضافة الرابط الصحيح للصورة
+            const message = `أرغب في طلب المنتج: ${productName}\nرابط الصورة: ${imageUrl}`;
+            const whatsappLink = `https://wa.me/201228053020?text=${encodeURIComponent(message)}`;
+            window.open(whatsappLink, '_blank');
+
+        }
+    </script>
+</body>
+
+</html>
